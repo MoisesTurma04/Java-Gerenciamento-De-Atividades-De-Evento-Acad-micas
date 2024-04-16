@@ -1,7 +1,9 @@
 package com.mhs.atividadesdeumeventoacademico.entites;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -19,12 +21,14 @@ public class Participante {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
+
+	@Column(unique = true)
 	private String email;
 
 	@ManyToMany
-	@JoinTable(name = "atividade_participante", joinColumns = @JoinColumn(name = "participante_id"), inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+	@JoinTable(name = "tb_atividade_participante", joinColumns = @JoinColumn(name = "participante_id"), inverseJoinColumns = @JoinColumn(name = "atividade_id"))
 
-	private Set<Atividade> atividades;
+	private Set<Atividade> atividades = new HashSet<>();
 
 	public Participante() {
 	}
@@ -62,6 +66,10 @@ public class Participante {
 
 	public Set<Atividade> getAtividades() {
 		return atividades;
+	}
+
+	public void setAtividades(Set<Atividade> atividades) {
+		this.atividades = atividades;
 	}
 
 }

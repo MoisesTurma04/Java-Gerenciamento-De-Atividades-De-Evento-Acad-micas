@@ -33,7 +33,6 @@ public class Bloco {
 	}
 
 	public Bloco(Integer id, Instant inicio, Instant fim, Atividade atividade) {
-		super();
 		this.id = id;
 		this.inicio = inicio;
 		this.fim = fim;
